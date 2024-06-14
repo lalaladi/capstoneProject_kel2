@@ -1,10 +1,11 @@
 import numpy as np
 import streamlit as st
-import tensorflow as tf
 from tensorflow.keras.models import load_model
+from tensorflow.keras.initializers import Orthogonal
 
-# Memuat model Keras
-model = load_model('D:/KEGIATAN/MBKM/Study/job_prediction.h5')
+# Memuat model Keras dengan custom objects
+custom_objects = {'Orthogonal': Orthogonal}
+model = load_model('D:/KEGIATAN/MBKM/Study/job_prediction.h5', custom_objects=custom_objects)
 
 def fraudulent_predict(input_data):
     # Ubah input ke array NumPy
