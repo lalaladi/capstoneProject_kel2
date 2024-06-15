@@ -29,7 +29,7 @@ def main():
     st.title("Job Posting Prediction")
         
     # Inisialisasi input data        
-    Title = st.text_area('Posisi Pekerjaan yang Dicari')
+    Title = st.text_area('Posisi Pekerjaan yang Ditawarkan')
     Location = st.text_area('Lokasi Pekerjaan')
     Department = st.text_area('Divisi Spesifik Lowongan')
     Description = st.text_area('Detail Pekerjaan')
