@@ -7,5 +7,5 @@ tensorflow
 tensorflow_hub
 nltk==3.6.7
 seaborn
-wordcloud==1.26.2
-textblob==3.8.1
+wordcloud
+textblob
