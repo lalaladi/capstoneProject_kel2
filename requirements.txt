@@ -6,6 +6,6 @@ pip==23.1.2
 tensorflow
 tensorflow_hub
 nltk==3.6.7
-seaborn==
+seaborn
 wordcloud==1.26.2
 textblob==3.8.1
