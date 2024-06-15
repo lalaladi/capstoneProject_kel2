@@ -8,7 +8,7 @@ custom_objects = {'Orthogonal': tf.keras.initializers.Orthogonal}
 
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model('D:/KEGIATAN/MBKM/Study/job_prediction.h5', custom_objects=custom_objects)
+    model = tf.keras.models.load_model('job_prediction.h5', custom_objects=custom_objects)
     return model
 
 with st.spinner("Loading Model...."):
