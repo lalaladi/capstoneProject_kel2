@@ -1,15 +1,22 @@
 import numpy as np
 import streamlit as st
-from tensorflow.keras.models import load_model
-from tensorflow.keras.initializers import Orthogonal
+import tensorflow as tf
+from tensorflow import keras
 
-# Memuat model Keras dengan custom objects
-custom_objects = {'Orthogonal': Orthogonal}
-model = load_model('D:/KEGIATAN/MBKM/Study/job_prediction.h5', custom_objects=custom_objects)
+# Daftarkan initializer Orthogonal
+custom_objects = {'Orthogonal': tf.keras.initializers.Orthogonal}
 
+@st.cache_resource
+def load_model():
+    model = tf.keras.models.load_model('D:/KEGIATAN/MBKM/Study/job_prediction.h5', custom_objects=custom_objects)
+    return model
+
+with st.spinner("Loading Model...."):
+    model = load_model()
+    
 def fraudulent_predict(input_data):
-    # Ubah input ke array NumPy
-    input_data_as_numpy_array = np.array(input_data)
+    # Ubah input ke array NumPy dan tambahkan dimensi
+    input_data_as_numpy_array = np.array(input_data).reshape(1, -1)
     
     prediction = model.predict(input_data_as_numpy_array)
     
@@ -22,17 +29,17 @@ def main():
     st.title("Job Posting Prediction")
         
     # Inisialisasi input data        
-    Title = st.text_input('Posisi Pekerjaan yang Dicari')
-    Location = st.text_input('Lokasi Pekerjaan')
-    Department = st.text_input('Divisi Spesifik Lowongan')
-    Description = st.text_input('Detail Pekerjaan')
-    Company_profile = st.text_input('Deskripsi Pekerjaan')
-    Requirements = st.text_input('Persyaratan Lowongan Pekerjaan')
-    Benefits = st.text_input('Keuntungan yang ditawarkan kepada Pelamar')
-    Required_experience = st.text_input('Tingkat pengalaman yang diperlukan untuk pekerjaan')
-    Required_education = st.text_input('Tingkat pendidikan minimum yang diperlukan untuk pekerjaan')
-    Industry = st.text_input('Perusahaan bergerak di sektor apa?')
-    Function = st.text_input('Spesialisasi dalam industri tersebut')
+    Title = st.text_area('Posisi Pekerjaan yang Dicari')
+    Location = st.text_area('Lokasi Pekerjaan')
+    Department = st.text_area('Divisi Spesifik Lowongan')
+    Description = st.text_area('Detail Pekerjaan')
+    Company_profile = st.text_area('Deskripsi Perusahaan')
+    Requirements = st.text_area('Persyaratan Lowongan Pekerjaan')
+    Benefits = st.text_area('Keuntungan yang ditawarkan kepada Pelamar')
+    Required_experience = st.text_area('Tingkat pengalaman yang diperlukan untuk pekerjaan')
+    Required_education = st.text_area('Tingkat pendidikan minimum yang diperlukan untuk pekerjaan')
+    Industry = st.text_area('Perusahaan bergerak di sektor apa?')
+    Function = st.text_area('Spesialisasi dalam industri tersebut')
         
     # Membuat combined_text
     combined_text = f"{Title} {Location} {Department} {Company_profile} {Description} {Requirements} {Benefits} {Required_experience} {Required_education} {Industry} {Function}"
