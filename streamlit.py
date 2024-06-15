@@ -16,7 +16,7 @@ with st.spinner("Loading Model...."):
     
 def fraudulent_predict(input_data):
     # Ubah input ke array NumPy dan tambahkan dimensi
-    input_data_as_numpy_array = np.array(input_data).reshape(1, -1)
+    input_data_as_numpy_array = np.array(input_data, dtype=np.float32).reshape(1, -1)
     
     prediction = model.predict(input_data_as_numpy_array)
     
